@@ -42,3 +42,159 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: #f5f5f5;
 }
+
+
+.text-white {
+  color: var(--white);
+}
+
+.text-grey {
+  color: var(--grey);
+}
+
+.text-grey-1 {
+  color: var(--grey-1);
+}
+
+.text-grey-2 {
+  color: var(--grey-2);
+}
+
+.text-purple {
+  color: var(--purple);
+}
+
+.text-pink {
+  color: var(--pink);
+}
+
+.text-indigo {
+  color: var(--indigo);
+}
+
+.text-cyan {
+  color: var(--cyan);
+}
+
+.text-blue {
+  color: var(--blue);
+}
+
+.text-red {
+  color: var(--red);
+}
+
+.text-orange {
+  color: var(--orange);
+}
+
+.text-green {
+  color: var(--green);
+}
+
+.text-yellow {
+  color: var(--yellow);
+}
+
+.bg-dark {
+  background-color: var(--dark-bg);
+}
+
+.bg-white {
+  background-color: var(--white);
+}
+
+.bg-grey {
+  background-color: var(--grey);
+}
+
+.bg-grey-1 {
+  background-color: var(--grey-1);
+}
+
+.bg-grey-2 {
+  background-color: var(--grey-2);
+}
+
+.bg-purple {
+  background-color: var(--purple);
+}
+
+.bg-pink {
+  background-color: var(--pink);
+}
+
+.bg-indigo {
+  background-color: var(--indigo);
+}
+
+.bg-cyan {
+  background-color: var(--cyan);
+}
+
+.bg-blue {
+  background-color: var(--blue);
+}
+
+.bg-red {
+  background-color: var(--red);
+}
+
+.bg-orange {
+  background-color: var(--orange);
+}
+
+.bg-green {
+  background-color: var(--green);
+}
+
+.bg-yellow {
+  background-color: var(--yellow);
+}
+
+.font-header-1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.font-header-2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.font-header-3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-italic {
+  font-style: italic;
+}
+
+.font-underline {
+  text-decoration: underline;
+}
+
+.font-strike {
+  text-decoration: line-through;
+}
+
+.font-uppercase {
+  text-transform: uppercase;
+}
+
+.font-lowercase {
+  text-transform: lowercase;
+}
