@@ -4,22 +4,21 @@ import { useState } from "react";
 
 import PropTypes from "prop-types";
 
-import TextCell from "../../components/textCell/textCell";
+import TextCell from "../../components/textCell/textCell.jsx";
 
-const exampleTextCells = [
-  { text: "Hello", styles: ["font-header-1", "text-indigo"] },
-  { text: "World", styles: ["font-header-2", "text-red"] },
-];
+// const exampleTextCells = [
+//   { text: "Hello", styles: ["font-header-1", "text-indigo"] },
+//   { text: "World", styles: ["font-header-2", "text-red"] },
+// ];
 
 const TextEditor = () => {
-  const [textCells, setTextCells] = useState(exampleTextCells);
-  // const [textCells, setTextCells] = useState([]);
+  // const [textCells, setTextCells] = useState(exampleTextCells);
+  const [textCells, setTextCells] = useState([]);
 
   return (
     <>
       <h1>Welcome To Text Editor</h1>
       <div className="display">
-        <h2>Output</h2>
         <div className="display-text">
           {textCells.map((cell, index) => {
             return (
@@ -35,10 +34,28 @@ const TextEditor = () => {
 
 export default TextEditor;
 
-const Editor = ({setTextCells}) => {
+const Editor = ({ setTextCells }) => {
   const [fontStyle, setFontStyle] = useState("font-normal");
   const [textStyle, setTextStyle] = useState([]);
   const [textColor, setTextColor] = useState("text-black");
+
+  const fontStyleOptions = ["normal", "italic", "underline", "strike", "bold"];
+
+  const fontColorOptions = [
+    "black",
+    "blue",
+    "green",
+    "indigo",
+    "yellow",
+    "red",
+    "purple",
+    "pink",
+    "gray",
+    "orange",
+    "teal",
+    "cyan",
+    "white",
+  ];
 
   return (
     <div className="editor">
@@ -47,161 +64,34 @@ const Editor = ({setTextCells}) => {
         placeholder="Start typing here..."
       ></textarea>
       <div className="editor-style">
-        <div className="font-style">
-          <h2>font style</h2>
-          <select
-            name="font-selector"
-            id="font-selector"
-            onChange={(e) => {
-              setFontStyle(e.target.value);
-            }}
-          >
-            <option value="font-normal">Normal</option>
-            <option value="font-header-3">Header 3</option>
-            <option value="font-header-2">Header 2</option>
-            <option value="font-header-1">Header 1</option>
-          </select>
-        </div>
+        <FontSelection setFontStyle={setFontStyle} />
         <div className="text-style">
-          <h2>text style</h2>
+          <h2>Text Style</h2>
           <div className="checkboxes-group">
-            <div className="input-group">
-              <input
-                type="checkbox"
-                id="bold"
-                name="bold"
-                value="font-bold"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setTextStyle([...textStyle, e.target.value]);
-                  } else {
-                    setTextStyle(
-                      textStyle.filter((style) => style !== e.target.value)
-                    );
-                  }
-                }}
-              />
-              <label htmlFor="bold">Bold</label>
-            </div>
-            <div className="input-group">
-              <input
-                type="checkbox"
-                id="italic"
-                name="italic"
-                value="font-italic"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setTextStyle([...textStyle, e.target.value]);
-                  } else {
-                    setTextStyle(
-                      textStyle.filter((style) => style !== e.target.value)
-                    );
-                  }
-                }}
-              />
-              <label htmlFor="italic">Italic</label>
-            </div>
-            <div className="input-group">
-              <input
-                type="checkbox"
-                id="underline"
-                name="underline"
-                value="font-underline"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setTextStyle([...textStyle, e.target.value]);
-                  } else {
-                    setTextStyle(
-                      textStyle.filter((style) => style !== e.target.value)
-                    );
-                  }
-                }}
-              />
-              <label htmlFor="underline">Underline</label>
-            </div>
-            <div className="input-group">
-              <input
-                type="checkbox"
-                id="underline"
-                name="underline"
-                value="font-strike"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setTextStyle([...textStyle, e.target.value]);
-                  } else {
-                    setTextStyle(
-                      textStyle.filter((style) => style !== e.target.value)
-                    );
-                  }
-                }}
-              />
-              <label htmlFor="underline">Strike Through</label>
-            </div>
+            {fontStyleOptions.map((type, index) => {
+              return (
+                <TextStyle
+                  key={index}
+                  setTextStyle={setTextStyle}
+                  textStyle={textStyle}
+                  type={type}
+                />
+              );
+            })}
           </div>
         </div>
         <div className="text-color">
           <h2>text color</h2>
           <div className="checkboxes-group">
-            <div className="input-group">
-              <input
-                type="radio"
-                id="text-red"
-                name="text-color"
-                value="text-red"
-                onChange={(e) => {
-                  setTextColor(e.target.value);
-                }}
-              />
-              <label htmlFor="text-red">Red</label>
-            </div>
-            <div className="input-group">
-              <input
-                type="radio"
-                id="text-blue"
-                name="text-color"
-                value="text-blue"
-                onChange={(e) => {
-                  setTextColor(e.target.value);
-                }}
-              />
-              <label htmlFor="text-blue">Blue</label>
-            </div>
-            <div className="input-group">
-              <input
-                type="radio"
-                id="text-green"
-                name="text-color"
-                value="text-green"
-                onChange={(e) => {
-                  setTextColor(e.target.value);
-                }}
-              />
-              <label htmlFor="text-green">Green</label>
-            </div>
-            <div className="input-group">
-              <input
-                type="radio"
-                id="text-indigo"
-                name="text-color"
-                value="text-indigo"
-                onChange={(e) => {
-                  setTextColor(e.target.value);
-                }}
-              />
-              <label htmlFor="text-indigo">Indigo</label>
-            </div>
-            <div className="input-group">
-              <input
-                type="radio"
-                id="text-yellow"
-                name="text-color"
-                value="text-yellow"
-                onChange={(e) => {
-                  setTextColor(e.target.value);
-                }}
-              />
-              <label htmlFor="text-yellow">Yellow</label>
-            </div>
+            {fontColorOptions.map((color, index) => {
+              return (
+                <ColorStyle
+                  key={index}
+                  setTextColor={setTextColor}
+                  color={color}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
@@ -228,4 +118,77 @@ const Editor = ({setTextCells}) => {
 
 Editor.propTypes = {
   setTextCells: PropTypes.func.isRequired,
+};
+
+const FontSelection = ({ setFontStyle }) => {
+  return (
+    <div className="font-style">
+      <h2>Font Style</h2>
+      <select
+        name="font-selector"
+        id="font-selector"
+        onChange={(e) => {
+          setFontStyle(e.target.value);
+        }}
+      >
+        <option value="font-normal">Normal</option>
+        <option value="font-header-3">Header 3</option>
+        <option value="font-header-2">Header 2</option>
+        <option value="font-header-1">Header 1</option>
+      </select>
+    </div>
+  );
+};
+
+FontSelection.propTypes = {
+  setFontStyle: PropTypes.func.isRequired,
+};
+
+const TextStyle = ({ setTextStyle, textStyle, type }) => {
+  return (
+    <div className="input-group">
+      <input
+        type="checkbox"
+        id={type}
+        name={type}
+        value={"font-" + type}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setTextStyle([...textStyle, e.target.value]);
+          } else {
+            setTextStyle(textStyle.filter((style) => style !== e.target.value));
+          }
+        }}
+      />
+      <label htmlFor="bold">{type}</label>
+    </div>
+  );
+};
+
+TextStyle.propTypes = {
+  setTextStyle: PropTypes.func.isRequired,
+  textStyle: PropTypes.array.isRequired,
+  type: PropTypes.string.isRequired,
+};
+
+const ColorStyle = ({ setTextColor, color }) => {
+  return (
+    <div className="input-group">
+      <input
+        type="radio"
+        id={"text-" + color}
+        name="text-color"
+        value={"text-" + color}
+        onChange={(e) => {
+          setTextColor(e.target.value);
+        }}
+      />
+      <label htmlFor={"text" + color}>{color}</label>
+    </div>
+  );
+};
+
+ColorStyle.propTypes = {
+  setTextColor: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired,
 };
