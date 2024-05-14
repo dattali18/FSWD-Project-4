@@ -16,19 +16,24 @@ const TextEditor = () => {
   const [textCells, setTextCells] = useState([]);
 
   return (
-    <>
+    <div className="main">
       <h1>Welcome To Text Editor</h1>
       <div className="display">
+        <Editor setTextCells={setTextCells} />
         <div className="display-text">
           {textCells.map((cell, index) => {
             return (
-              <TextCell key={index} text={cell.text} styles={cell.styles} />
+              <TextCell
+                key={index}
+                text={cell.text}
+                styles={cell.styles}
+                size={cell.size}
+              />
             );
           })}
         </div>
       </div>
-      <Editor setTextCells={setTextCells} />
-    </>
+    </div>
   );
 };
 
@@ -39,7 +44,7 @@ const Editor = ({ setTextCells }) => {
   const [textStyle, setTextStyle] = useState([]);
   const [textColor, setTextColor] = useState("text-black");
 
-  const fontStyleOptions = ["normal", "italic", "underline", "strike", "bold"];
+  const fontStyleOptions = ["italic", "underline", "strike", "bold"];
 
   const fontColorOptions = [
     "black",
@@ -52,10 +57,10 @@ const Editor = ({ setTextCells }) => {
     "pink",
     "gray",
     "orange",
-    "teal",
     "cyan",
-    "white",
   ];
+
+  const [fontSize, setFontSize] = useState(16);
 
   return (
     <div className="editor">
@@ -64,6 +69,23 @@ const Editor = ({ setTextCells }) => {
         placeholder="Start typing here..."
       ></textarea>
       <div className="editor-style">
+        <div className="text-size">
+          <h2>Text Size</h2>
+          <div className="input-group">
+            <input
+              type="range"
+              id="text-size"
+              name="text-size"
+              value={fontSize}
+              min="10"
+              max="50"
+              onChange={(e) => {
+                e.target.value && setFontSize(e.target.value);
+              }}
+            />
+            <label htmlFor="text-size">{fontSize}</label>
+          </div>
+        </div>
         <FontSelection setFontStyle={setFontStyle} />
         <div className="text-style">
           <h2>Text Style</h2>
@@ -81,7 +103,7 @@ const Editor = ({ setTextCells }) => {
           </div>
         </div>
         <div className="text-color">
-          <h2>text color</h2>
+          <h2>Text Color</h2>
           <div className="checkboxes-group">
             {fontColorOptions.map((color, index) => {
               return (
@@ -97,15 +119,16 @@ const Editor = ({ setTextCells }) => {
       </div>
       <div className="editor-buttons">
         <button
+          className="save-button"
           onClick={() => {
             const text = document.querySelector(".text-area").value;
-            // setTextCells([
-            //   ...textCells,
-            //   { text: text, styles: [...textStyle, fontStyle, textColor] },
-            // ]);
             setTextCells((prevTextCells) => [
               ...prevTextCells,
-              { text: text, styles: [...textStyle, fontStyle, textColor] },
+              {
+                text: text,
+                styles: [...textStyle, fontStyle, textColor],
+                size: fontSize,
+              },
             ]);
           }}
         >
@@ -148,6 +171,7 @@ const TextStyle = ({ setTextStyle, textStyle, type }) => {
   return (
     <div className="input-group">
       <input
+        className={"checkbox-style checkbox-" + type}
         type="checkbox"
         id={type}
         name={type}
@@ -160,7 +184,9 @@ const TextStyle = ({ setTextStyle, textStyle, type }) => {
           }
         }}
       />
-      <label htmlFor="bold">{type}</label>
+      <label className={"checkbox-" + type} htmlFor={type}>
+        {type}
+      </label>
     </div>
   );
 };
@@ -183,7 +209,9 @@ const ColorStyle = ({ setTextColor, color }) => {
           setTextColor(e.target.value);
         }}
       />
-      <label htmlFor={"text" + color}>{color}</label>
+      <label className={"text-" + color} htmlFor={"text" + color}>
+        {color}
+      </label>
     </div>
   );
 };
@@ -191,4 +219,5 @@ const ColorStyle = ({ setTextColor, color }) => {
 ColorStyle.propTypes = {
   setTextColor: PropTypes.func.isRequired,
   color: PropTypes.string.isRequired,
+  checked: PropTypes.bool,
 };
