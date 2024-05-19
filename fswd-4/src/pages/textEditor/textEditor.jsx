@@ -116,24 +116,24 @@ const Editor = ({ setTextCells }) => {
             })}
           </div>
         </div>
-      </div>
-      <div className="editor-buttons">
-        <button
-          className="save-button"
-          onClick={() => {
-            const text = document.querySelector(".text-area").value;
-            setTextCells((prevTextCells) => [
-              ...prevTextCells,
-              {
-                text: text,
-                styles: [...textStyle, fontStyle, textColor],
-                size: fontSize,
-              },
-            ]);
-          }}
-        >
-          Save
-        </button>
+        <div className="editor-buttons">
+          <button
+            className="save-button"
+            onClick={() => {
+              const text = document.querySelector(".text-area").value;
+              setTextCells((prevTextCells) => [
+                ...prevTextCells,
+                {
+                  text: text,
+                  styles: [...textStyle, fontStyle, textColor],
+                  size: fontSize,
+                },
+              ]);
+            }}
+          >
+            Save
+          </button>
+        </div>
       </div>
     </div>
   );

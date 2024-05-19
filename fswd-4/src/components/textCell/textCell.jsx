@@ -23,7 +23,7 @@ const TextCell = ({ text, styles, size }) => {
 TextCell.propTypes = {
   text: PropTypes.string.isRequired,
   styles: PropTypes.array.isRequired,
-  size: PropTypes.number.isRequired,
+  size: PropTypes.string.isRequired,
 };
 
 export default TextCell;
