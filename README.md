@@ -11,3 +11,4 @@ Run the following command after cloning the project:
 - `npm install`
 - `npm run dev`
 
+## Git Signin with gpg
