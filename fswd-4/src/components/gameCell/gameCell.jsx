@@ -1,8 +1,17 @@
 import { useState } from "react";
 
+import { updateGamer } from "../../utils/gamers.js";
+
 import PropTypes from "prop-types";
 
-function handleGamePlay(setNumber, setStep, setIsDone, number, step, operation) {
+function handleGamePlay(
+  setNumber,
+  setStep,
+  setIsDone,
+  number,
+  step,
+  operation
+) {
   if (number == 100) {
     setIsDone(true);
   }
@@ -17,15 +26,20 @@ function handleGamePlay(setNumber, setStep, setIsDone, number, step, operation) 
   }
 }
 
-export default function GameCell({ name, state, random }) {
+export default function GameCell({ gamer, random }) {
   const [number, setNumber] = useState(random);
   const [step, setStep] = useState(1);
   const [isDone, setIsDone] = useState(false);
 
+  // when isDone is true, the game is over, and we should store the new game into the localStorage
+  if (isDone) {
+    updateGamer(gamer, step);
+  }
+
   return (
     <div className="game-cell">
-      <h2>{name}</h2>
-      <p>{state ? "Active" : "Inactive"}</p>
+      <h2>{gamer.name}</h2>
+      <p>{gamer.state ? "Active" : "Inactive"}</p>
       <p>{number}</p>
       <p>{step}</p>
 
@@ -41,7 +55,7 @@ export default function GameCell({ name, state, random }) {
               (n) => n + 1
             );
           }}
-          disabled={isDone || !state}
+          disabled={isDone || !gamer.state}
         >
           +1
         </button>
@@ -56,7 +70,7 @@ export default function GameCell({ name, state, random }) {
               (n) => n - 1
             );
           }}
-          disabled={isDone || !state}
+          disabled={isDone || !gamer.state}
         >
           -1
         </button>
@@ -71,7 +85,7 @@ export default function GameCell({ name, state, random }) {
               (n) => n * 2
             );
           }}
-          disabled={isDone || !state}
+          disabled={isDone || !gamer.state}
         >
           * 2
         </button>
@@ -81,7 +95,7 @@ export default function GameCell({ name, state, random }) {
               Math.round(n / 2)
             );
           }}
-          disabled={isDone || !state}
+          disabled={isDone || !gamer.state}
         >
           / 2
         </button>
@@ -91,7 +105,6 @@ export default function GameCell({ name, state, random }) {
 }
 
 GameCell.propTypes = {
-  name: PropTypes.string.isRequired,
-  state: PropTypes.bool.isRequired,
+  gamer: PropTypes.object.isRequired,
   random: PropTypes.number.isRequired,
 };

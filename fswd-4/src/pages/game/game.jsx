@@ -2,7 +2,9 @@ import { useState } from "react";
 
 import GameCell from "../../components/gameCell/gameCell";
 
-const gamers = [{ name: "Gamer 1", state: false, games: [8, 40, 12] }];
+import { getGamers } from "../../utils/gamers";
+
+// const gamers = [{ name: "Gamer 1", state: false, games: [8, 40, 12] }];
 
 /*
 The gamer will be stored in the localStorage
@@ -16,17 +18,13 @@ gamer = {
 }
 */
 
-function saveGamers(gamers) {
-  localStorage.setItem("gamers", JSON.stringify(gamer));
-}
 
-function getGamers() {
-  const gamers = localStorage.getItem("gamers");
-  return JSON.parse(gamers);
-}
 
 export default function Game() {
-  const [gamer, setGamer] = useState(gamers);
+  // get the gamers using the getGamers function
+  let gamers = getGamers();
+
+  const [gamer, setGamer] = useState([...gamers]);
 
   return (
     <>
@@ -62,8 +60,7 @@ export default function Game() {
         {gamer.map((g, i) => (
           <GameCell
             key={i}
-            name={g.name}
-            state={g.state}
+            gamer={g}
             random={Math.floor(Math.random() * 100)}
           />
         ))}
