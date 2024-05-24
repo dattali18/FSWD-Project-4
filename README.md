@@ -1,9 +1,9 @@
 # FSWD-Project-4
-This is the repo for the 4th project in the full-stack-web-develpment course
+This is the repo for the 4th project in the full-stack-web-development course
 
 ## Build System
 
-In this project we are using `vite` inorder to create and run the app
+In this project we are using `vite` in-order to create and run the app
 it is a faster and better alternative to the `create-react-app` command
 
 Run the following command after cloning the project:
@@ -11,4 +11,4 @@ Run the following command after cloning the project:
 - `npm install`
 - `npm run dev`
 
-## Git Signin with gpg
+## Git Sign-in with `gpg`

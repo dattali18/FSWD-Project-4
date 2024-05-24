@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import GameCell from "../../components/gameCell/gameCell";
 
-import { getGamers } from "../../utils/gamers";
+import { getGamers, saveGamer } from "../../utils/gamers";
 
 // const gamers = [{ name: "Gamer 1", state: false, games: [8, 40, 12] }];
 
@@ -17,6 +17,26 @@ gamer = {
   games: [number] : history of games
 }
 */
+
+function handleAddGamer(name) {
+  let newGamer = {
+    name: name,
+    state: false,
+    games: [],
+  };
+
+  let gamers = getGamers();
+
+  let gamerIndex = gamers.findIndex((g) => g.name === name);
+
+  if (gamerIndex === -1) {
+    saveGamer(newGamer);
+  } else {
+    newGamer = gamers[gamerIndex];
+  }
+
+  return newGamer;
+}
 
 
 
@@ -33,8 +53,18 @@ export default function Game() {
 
       <div className="controller">
         <div className="new-gamer">
-          <input type="text" placeholder="Gamer Name" />
-          <button>Add New Gamer</button>
+          <input type="text" placeholder="Gamer Name" id="gamer-name"/>
+          <button
+            onClick={() => {
+              // get the value of the input
+              // call the handleAddGamer function
+              // pass the value of the input and the setGamer function
+              let input = document.getElementById("gamer-name");
+              let newGamer = handleAddGamer(input.value);
+
+              setGamer([...gamer, newGamer]);
+            }}
+          >Add New Gamer</button>
         </div>
         <div className="start-game">
           <button
