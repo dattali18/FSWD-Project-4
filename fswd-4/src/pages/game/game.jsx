@@ -21,30 +21,8 @@ gamer = {
 }
 */
 
-function handleAddGamer(name) {
-  let newGamer = {
-    name: name,
-    state: false,
-    games: [],
-  };
-
-  let gamers = getGamers();
-
-  let gamerIndex = gamers.findIndex((g) => g.name === name);
-
-  if (gamerIndex === -1) {
-    saveGamer(newGamer);
-  } else {
-    newGamer = gamers[gamerIndex];
-  }
-
-  return newGamer;
-}
-
 export default function Game() {
-  let gamers = getGamers();
-
-  const [gamer, setGamer] = useState([...gamers]);
+  const [gamer, setGamer] = useState([...getGamers()]);
   const [leaderboard, setLeaderboard] = useState([]);
 
   useEffect(() => {
@@ -63,17 +41,31 @@ export default function Game() {
   };
 
   const handleAddPlayer = (name) => {
-    if (gamer.some((g) => g.name === name.trim())) {
-      alert("A player with this name already exists.");
-      return;
+    let gamers = getGamers();
+    let gamerIndex = gamers.findIndex((g) => g.name === name);
+
+    if (gamerIndex === -1) {
+      let newGamer = {
+        name: name,
+        state: false,
+        games: [],
+        playing: true,
+      };
+      gamers.push(newGamer);
+      localStorage.setItem('gamers', JSON.stringify(gamers));
+      setGamer([...gamers]);
+    } else {
+      gamers[gamerIndex].playing = true;
+      localStorage.setItem('gamers', JSON.stringify(gamers));
+      setGamer([...gamers]);
     }
-    let newGamer = handleAddGamer(name.trim());
-    setGamer([...gamer, newGamer]);
   };
 
   const handleQuitPlayer = (name) => {
     setGamer((prevGamers) => {
-      const updatedGamers = prevGamers.filter((g) => g.name !== name);
+      const updatedGamers = prevGamers.map((g) =>
+        g.name === name ? { ...g, playing: false } : g
+      );
       localStorage.setItem('gamers', JSON.stringify(updatedGamers));
       return updatedGamers;
     });
@@ -105,7 +97,7 @@ export default function Game() {
 
       <div className="game-container">
         <div className="game-cell-container">
-          {gamer.map((g, i) => (
+          {gamer.filter((g) => g.playing).map((g, i) => (
             <GameCell
               key={i}
               gamer={g}

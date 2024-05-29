@@ -3,15 +3,21 @@ import PropTypes from "prop-types";
 const TextCell = ({ textSegments }) => {
   return (
     <div className="text-cell">
-      {textSegments.map((segment, index) => (
-        <span
-          key={index}
-          className={segment.styles.join(" ")}
-          style={{ fontSize: `${segment.size}px` }}
-        >
-          {segment.text}
-        </span>
-      ))}
+      {textSegments.map((segment, index) => {
+        const fontFamily = segment.styles.find(style => style.startsWith('fontFamily-'))?.split('-')[1] || 'inherit';
+        return (
+          <span
+            key={index}
+            style={{
+              fontSize: `${segment.size}px`,
+              fontFamily: fontFamily
+            }}
+            className={segment.styles.filter(style => !style.startsWith('fontFamily-')).join(' ')}
+          >
+            {segment.text}
+          </span>
+        );
+      })}
     </div>
   );
 };

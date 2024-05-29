@@ -11,7 +11,6 @@ function handleGamePlay(
   number,
   step,
   operation,
-  handleNextTurn,
   handleGameEnd
 ) {
   if (number === 100) {
@@ -28,7 +27,6 @@ function handleGamePlay(
     setIsDone(true);
     handleGameEnd();
   }
-  handleNextTurn();
 }
 
 export default function GameCell({
@@ -49,15 +47,16 @@ export default function GameCell({
     setIsDone(false);
   };
 
-  const handleQuitGame = () => {
-    handleQuitPlayer(gamer.name);
-  };
-
   const handleGameEnd = () => {
     setIsPlaying(false);
     gamer.games.push(step);
-    updateGamer(gamer);
-    updateLeaderboard(gamers);
+    const storedGamers = JSON.parse(localStorage.getItem('gamers')) || [];
+    const updatedGamers = storedGamers.map((storedGamer) =>
+      storedGamer.name === gamer.name ? gamer : storedGamer
+    );
+    localStorage.setItem('gamers', JSON.stringify(updatedGamers));
+
+    updateLeaderboard(updatedGamers);
   };
 
   return (
@@ -80,7 +79,6 @@ export default function GameCell({
                   number,
                   step,
                   (n) => n + 1,
-                  () => {},
                   handleGameEnd
                 );
               }}
@@ -98,7 +96,6 @@ export default function GameCell({
                   number,
                   step,
                   (n) => n - 1,
-                  () => {},
                   handleGameEnd
                 );
               }}
@@ -116,7 +113,6 @@ export default function GameCell({
                   number,
                   step,
                   (n) => n * 2,
-                  () => {},
                   handleGameEnd
                 );
               }}
@@ -134,7 +130,6 @@ export default function GameCell({
                   number,
                   step,
                   (n) => Math.round(n / 2),
-                  () => {},
                   handleGameEnd
                 );
               }}
@@ -148,7 +143,7 @@ export default function GameCell({
             <button className="green-button" onClick={handleStartGame}>
               Start Game
             </button>
-            <button className="red-button" onClick={handleQuitGame}>
+            <button className="red-button" onClick={() => handleQuitPlayer(gamer.name)}>
               Quit Game
             </button>
           </>

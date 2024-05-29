@@ -106,7 +106,7 @@ Editor.propTypes = {
 
 const FontSelection = ({ setFontStyle, currentStyles }) => {
   const handleChange = (style) => {
-    setFontStyle([...currentStyles.filter(s => !s.startsWith("font-")), style]);
+    setFontStyle([...currentStyles.filter(s => !s.startsWith("fontFamily-")), `fontFamily-${style}`]);
   };
 
   return (
@@ -118,9 +118,10 @@ const FontSelection = ({ setFontStyle, currentStyles }) => {
         onChange={(e) => handleChange(e.target.value)}
       >
         <option value="font-normal">Normal</option>
-        <option value="font-header-3">Header 3</option>
-        <option value="font-header-2">Header 2</option>
-        <option value="font-header-1">Header 1</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Arial">Arial</option>
+        <option value="Courier New">Courier New</option>
+        <option value="Comic Sans MS">Comic Sans MS</option>
       </select>
     </div>
   );

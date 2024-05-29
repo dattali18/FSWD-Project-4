@@ -1,8 +1,33 @@
-.main {
+/* FONTS*/
+@import url('https://fonts.googleapis.com/css2?family=Comic+Sans+MS:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+New:wght@400;700&display=swap');
+
+body, .fontFamily-Times-New-Roman {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.fontFamily-Arial {
+  font-family: Arial, sans-serif;
+}
+
+.fontFamily-Courier-New {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.fontFamily-Comic-Sans-MS {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+
+html {
+  background-color: #F0D6C3;
+}
+
+
+.main{
   width: 100%;
   height: 100%;
-  background-color: var(--white);
-  padding: 1rem;
+  background-color: #F0D6C3; /*#e5dcc5;*/
 }
 
 .display {
@@ -23,6 +48,8 @@
   width: 100%;
   text-align: center;
   word-break: break-word;
+  background-color: white;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
 .editor-container {
@@ -37,6 +64,9 @@
   border: 1px solid var(--grey-1);
   border-radius: 10px;
   padding: 1rem;
+  background-color: #F0E8E3/*#f7f3e8*/;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  margin-right: 10px;
 }
 
 .editor-style {
@@ -48,16 +78,6 @@
   gap: 2rem;
 }
 
-.text-area {
-  width: 100%;
-  height: 100%;
-  min-height: 10rem;
-  border: none;
-  border-radius: 10px;
-  outline: none;
-  resize: none;
-  padding: 1rem;
-}
 
 .text-cell {
   width: 100%;
@@ -136,6 +156,11 @@
   align-items: center;
   margin-top: 20px;
   width: 49%;
+  background-color: #F0E8E3;
+  border: 1px solid var(--grey-1);
+  border-radius: 10px;
+  box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.2);
+  margin-left: 10px;
 }
 
 .keyboard-row {
@@ -169,3 +194,4 @@
 .keyboard-key.backspace {
   font-size: 25px;
 }
+
