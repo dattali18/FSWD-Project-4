@@ -1,29 +1,23 @@
 import PropTypes from "prop-types";
 
-const TextCell = ({ text, styles, size }) => {
-  const className = styles.join(" ");
+const TextCell = ({ textSegments }) => {
   return (
-    <>
-      {size == 16 ? (
-        <div className={"text-cell " + className}>{text}</div>
-      ) : (
-        <div
-          style={{
-            fontSize: size + "px",
-          }}
-          className={"text-cell " + className}
+    <div className="text-cell">
+      {textSegments.map((segment, index) => (
+        <span
+          key={index}
+          className={segment.styles.join(" ")}
+          style={{ fontSize: `${segment.size}px` }}
         >
-          {text}
-        </div>
-      )}
-    </>
+          {segment.text}
+        </span>
+      ))}
+    </div>
   );
 };
 
 TextCell.propTypes = {
-  text: PropTypes.string.isRequired,
-  styles: PropTypes.array.isRequired,
-  size: PropTypes.string.isRequired,
+  textSegments: PropTypes.array.isRequired,
 };
 
 export default TextCell;

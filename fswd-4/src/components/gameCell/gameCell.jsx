@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { updateGamer } from "../../utils/gamers.js";
 
@@ -10,10 +10,13 @@ function handleGamePlay(
   setIsDone,
   number,
   step,
-  operation
+  operation,
+  handleNextTurn,
+  handleGameEnd
 ) {
-  if (number == 100) {
+  if (number === 100) {
     setIsDone(true);
+    handleGameEnd();
   }
 
   let n = operation(number);
@@ -21,84 +24,138 @@ function handleGamePlay(
   setNumber(n);
   setStep(step + 1);
 
-  if (n == 100) {
+  if (n === 100) {
     setIsDone(true);
+    handleGameEnd();
   }
+  handleNextTurn();
 }
 
-export default function GameCell({ gamer, random }) {
-  const [number, setNumber] = useState(random);
+export default function GameCell({
+  gamer,
+  handleQuitPlayer,
+  updateLeaderboard,
+  gamers,
+}) {
+  const [number, setNumber] = useState(0);
   const [step, setStep] = useState(1);
   const [isDone, setIsDone] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  // when isDone is true, the game is over, and we should store the new game into the localStorage
-  if (isDone) {
-    updateGamer(gamer, step);
-  }
+  const handleStartGame = () => {
+    setIsPlaying(true);
+    setNumber(Math.floor(Math.random() * 100));
+    setStep(1);
+    setIsDone(false);
+  };
+
+  const handleQuitGame = () => {
+    handleQuitPlayer(gamer.name);
+  };
+
+  const handleGameEnd = () => {
+    setIsPlaying(false);
+    gamer.games.push(step);
+    updateGamer(gamer);
+    updateLeaderboard(gamers);
+  };
 
   return (
     <div className="game-cell">
       <h2>{gamer.name}</h2>
-      <p>{gamer.state ? "Active" : "Inactive"}</p>
-      <p>{number}</p>
-      <p>{step}</p>
+      <p>Score: {number}</p>
+      <p>Number of Turns: {step}</p>
+      <p>Status: {isPlaying ? "Active" : "Inactive"}</p>
 
-      <div className="controller">
-        <button
-          onClick={() => {
-            handleGamePlay(
-              setNumber,
-              setStep,
-              setIsDone,
-              number,
-              step,
-              (n) => n + 1
-            );
-          }}
-          disabled={isDone || !gamer.state}
-        >
-          +1
-        </button>
-        <button
-          onClick={() => {
-            handleGamePlay(
-              setNumber,
-              setStep,
-              setIsDone,
-              number,
-              step,
-              (n) => n - 1
-            );
-          }}
-          disabled={isDone || !gamer.state}
-        >
-          -1
-        </button>
-        <button
-          onClick={() => {
-            handleGamePlay(
-              setNumber,
-              setStep,
-              setIsDone,
-              number,
-              step,
-              (n) => n * 2
-            );
-          }}
-          disabled={isDone || !gamer.state}
-        >
-          * 2
-        </button>
-        <button
-          onClick={() => {
-            handleGamePlay(setNumber, setStep, setIsDone, number, step, (n) =>
-              Math.round(n / 2)
-            );
-          }}
-          disabled={isDone || !gamer.state}
-        >
-          / 2
-        </button>
+      <div className="action-buttons">
+        {isPlaying ? (
+          <>
+            <button
+              className="action-button"
+              onClick={() => {
+                handleGamePlay(
+                  setNumber,
+                  setStep,
+                  setIsDone,
+                  number,
+                  step,
+                  (n) => n + 1,
+                  () => {},
+                  handleGameEnd
+                );
+              }}
+              disabled={isDone}
+            >
+              +1
+            </button>
+            <button
+              className="action-button"
+              onClick={() => {
+                handleGamePlay(
+                  setNumber,
+                  setStep,
+                  setIsDone,
+                  number,
+                  step,
+                  (n) => n - 1,
+                  () => {},
+                  handleGameEnd
+                );
+              }}
+              disabled={isDone}
+            >
+              -1
+            </button>
+            <button
+              className="action-button"
+              onClick={() => {
+                handleGamePlay(
+                  setNumber,
+                  setStep,
+                  setIsDone,
+                  number,
+                  step,
+                  (n) => n * 2,
+                  () => {},
+                  handleGameEnd
+                );
+              }}
+              disabled={isDone}
+            >
+              *2
+            </button>
+            <button
+              className="action-button"
+              onClick={() => {
+                handleGamePlay(
+                  setNumber,
+                  setStep,
+                  setIsDone,
+                  number,
+                  step,
+                  (n) => Math.round(n / 2),
+                  () => {},
+                  handleGameEnd
+                );
+              }}
+              disabled={isDone}
+            >
+              /2
+            </button>
+          </>
+        ) : (
+          <>
+            <button className="green-button" onClick={handleStartGame}>
+              Start Game
+            </button>
+            <button className="red-button" onClick={handleQuitGame}>
+              Quit Game
+            </button>
+          </>
+        )}
+      </div>
+      <div className="game-history">
+        <p>Previous games: {gamer.games.join(", ")}</p>
       </div>
     </div>
   );
@@ -106,5 +163,7 @@ export default function GameCell({ gamer, random }) {
 
 GameCell.propTypes = {
   gamer: PropTypes.object.isRequired,
-  random: PropTypes.number.isRequired,
+  handleQuitPlayer: PropTypes.func.isRequired,
+  updateLeaderboard: PropTypes.func.isRequired,
+  gamers: PropTypes.array.isRequired,
 };

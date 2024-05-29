@@ -1,0 +1,126 @@
+.center-title {
+    text-align: center;
+  }
+  
+  .header {
+    background-color: #e5dcc5;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  #gamer-name {
+    font-size: 1.2em;
+    padding: 10px;
+    width: 200px;
+  }
+  
+  .game-cell-container,.game-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    background-color: #c8a380;
+  }
+
+  .game-cell {
+    width: 300px;
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 20px;
+    background-color: beige;
+    border: 2px solid #000;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .controller {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .new-gamer,
+  .start-game {
+    margin: 0 10px;
+  }
+  
+  button {
+    margin: 5px;
+  }
+  
+  .action-button {
+    font-size: 1.2em;
+    padding: 10px;
+    margin-top: 10px;
+    width: 60px;
+  }
+  
+  .game-cell .action-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: auto;
+  }
+  
+  .orange-button {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .green-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .red-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .leaderboard {
+    background-color: #e5dcc5;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .leaderboard ol {
+    padding-left: 0;
+    list-style: none;
+  }
+  
+  .leaderboard-item {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .rank-1 {
+    color: gold;
+  }
+  
+  .rank-2 {
+    color: silver;
+  }
+  
+  .rank-3 {
+    color: brown;
+  }
+  
