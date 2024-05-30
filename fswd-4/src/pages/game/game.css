@@ -10,9 +10,14 @@
   }
 
   #gamer-name {
-    font-size: 1.2em;
+    font-size: 1em;
     padding: 10px;
     width: 200px;
+
+    border-radius: var(--radius);
+
+    border: 2px solid var(--grey-1);
+
   }
   
   .game-cell-container,.game-container {
@@ -71,6 +76,10 @@
     font-size: 1em;
     cursor: pointer;
     border-radius: 5px;
+  }
+
+  .orange-button:hover {
+    background-color: var(--orange-sec);
   }
   
   .green-button {

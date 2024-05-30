@@ -1,23 +1,23 @@
 :root {
   --purple: #5856d6;
-  --purple-sec: #5856d633;
+  --purple-sec: #5856d6cf;
   --pink: #ff2f54;
-  --pink-sec: #ff2f5433;
+  --pink-sec: #ff2f54cf;
   --indigo: #505dd3;
-  --indigo-sec: #505dd333;
+  --indigo-sec: #505dd3cf;
   --cyan: #53c7f0;
-  --cyan-sec: #53c7f033;
+  --cyan-sec: #53c7f0cf;
   --grey: #98989d;
   --blue: #008afc;
-  --blue-sec: #008afc33;
+  --blue-sec: #008afcdf;
   --red: #ff3b30;
-  --red-sec: #ff3b3033;
+  --red-sec: #ff3b30cf;
   --orange: #ff9500;
-  --orange-sec: #ff950033;
+  --orange-sec: #ff9500cf;
   --green: #4cd964;
-  --green-sec: #4cd96433;
+  --green-sec: #4cd964cf;
   --yellow: #ffcc00;
-  --yellow-sec: #ffcc0033;
+  --yellow-sec: #ffcc00cf;
 
   --dark-bg: #1c1c1e;
 
@@ -25,6 +25,8 @@
   --grey-2: #4a4a4a;
 
   --white: #f5f5f5;
+
+  --radius: 10px;
 }
 
 * {
