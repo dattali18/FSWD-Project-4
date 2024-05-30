@@ -3,7 +3,7 @@
   }
   
   .header {
-    background-color: #e5dcc5;
+    background-color: var(--white);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -19,7 +19,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    background-color: #c8a380;
+    background-color: var(--white);
   }
 
   .game-cell {
@@ -27,7 +27,7 @@
     box-sizing: border-box;
     margin: 10px;
     padding: 20px;
-    background-color: beige;
+    background-color: var(--white);
     border: 2px solid #000;
     border-radius: 10px;
     display: flex;
@@ -64,8 +64,8 @@
   }
   
   .orange-button {
-    background-color: orange;
-    color: white;
+    background-color: var(--orange);
+    color: var(--white);
     border: none;
     padding: 10px 20px;
     font-size: 1em;
@@ -74,8 +74,8 @@
   }
   
   .green-button {
-    background-color: green;
-    color: white;
+    background-color: var(--green);
+    color: var(--white);
     border: none;
     padding: 10px 20px;
     font-size: 1em;
@@ -84,8 +84,8 @@
   }
   
   .red-button {
-    background-color: red;
-    color: white;
+    background-color: var(--red);
+    color: var(--white);
     border: none;
     padding: 10px 20px;
     font-size: 1em;
@@ -94,7 +94,7 @@
   }
   
   .leaderboard {
-    background-color: #e5dcc5;
+    background-color: var(--white);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
