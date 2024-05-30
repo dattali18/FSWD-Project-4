@@ -7,11 +7,6 @@ import PropTypes from "prop-types";
 import TextCell from "../../components/textCell/textCell.jsx";
 import OnScreenKeyboard from "../../components/textCell/onScreenKeyboard.jsx";
 
-// const exampleTextCells = [
-//   { text: "Hello", styles: ["font-header-1", "text-indigo"] },
-//   { text: "World", styles: ["font-header-2", "text-red"] },
-// ];
-
 const TextEditor = () => {
   const [textSegments, setTextSegments] = useState([]);
   const [currentStyles, setCurrentStyles] = useState([]);
@@ -204,7 +199,7 @@ const ColorStyle = ({ setTextColor, currentColor }) => {
               name="text-color"
               value={"text-" + color}
               checked={currentColor.includes(`text-${color}`)}
-              onChange={(e) => handleColorChange(color)}
+              onChange={() => handleColorChange(color)}
             />
             <label className={"text-" + color} htmlFor={"text" + color}>
               {color}
