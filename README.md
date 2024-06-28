@@ -11,4 +11,7 @@ Run the following command after cloning the project:
 - `npm install`
 - `npm run dev`
 
-## Git Sign-in with `gpg`
+## Authors
+
+* [Daniel Attali](https://github.com/dattali18)
+* [Lior Seraf](https://github.com/lior-se)
